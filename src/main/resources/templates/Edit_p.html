@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Product</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #ffffdd">
+<div align="center" style="margin-top: 5%">
+        <h1 style="font-family: fantasy; font-style: inherit;">Edit Product</h1>
+        <br />
+        
+    <div class="container" style="background-color: #006a71; max-width:700px; height:420p; padding: 5%">    
+        
+        <form action="#" th:action="@{/save}" th:object="${product}"
+            method="post">
+ 
+            <table border="0" cellpadding="10">
+                <tr>             
+                    <td class="h5 text-light">Product ID:</td>
+                    <td>
+                        <input class="form-control" type="text" th:field="*{id}" readonly="readonly" />
+                    </td>
+                </tr>        
+                <tr>             
+                    <td class="h5 text-light">Product Name:</td>
+                    <td>
+                        <input class="form-control" type="text" th:field="*{name}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="h5 text-light">Brand:</td>
+                    <td><input class="form-control" type="text" th:field="*{brand}" /></td>
+                </tr>
+                <tr>
+                    <td class="h5 text-light">Made In:</td>
+                    <td><input class="form-control" type="text" th:field="*{madein}" /></td>
+                </tr>
+                <tr>
+                    <td class="h5 text-light">Price ($):</td>
+                    <td><input class="form-control" type="text" th:field="*{price}" /></td>
+                </tr>                            
+                <tr>
+                    <td colspan="2"><button class="btn btn-dark" type="submit"><h5>Save</h5></button> </td>
+                </tr>
+            </table>
+        </form>
+        
+    </div>
+    
+ </div>
+
+</body>
+</html>
