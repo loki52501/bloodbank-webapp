@@ -69,6 +69,26 @@ Collection<Role> roles;
 private Long invite;
 
 
+
+public Donor(Donor d)
+{
+	this.firstname = d.getFirstname();
+	this.lastname = d.getLastname();
+	this.email = d.getEmail();
+	this.dob =d.getDob();
+	this.gender = d.getGender();
+	this.ad1 = d.getAd1();
+	this.ad2 = d.getAd2();
+	this.state = d.getState();
+	this.city = d.getCity();
+	this.bloodgroup = d.getBloodgroup();
+	this.phno = d.getPhno();
+	this.password = d.getPassword();
+	this.roles = d.getRoles();
+	this.invite = d.getInvite();
+}
+
+
 public Donor(String firstname, String lastname, String email, Date dob, String gender, String ad1, String ad2,
 		String state, String city, String bloodgroup, Long phno, String password, Collection<Role> roles,
 		Long invite) {

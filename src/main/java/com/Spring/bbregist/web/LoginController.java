@@ -22,22 +22,49 @@ import com.Spring.bbregist.model.Donor;
 
 
 @Controller
-@RequestMapping("/hospital")
-public class HospitalLoginController {
+@RequestMapping
+public class LoginController {
 	
 	@Autowired
 	DonorDetails user1;
 	Authentication authentication;
 	@Autowired
 	HospitalDetails h1;
-	@GetMapping
+	
+	@RequestMapping("/donorlogin")
+	public String donorlogin() {
+		return "user_login";
+	}
+	
+	
+	@RequestMapping("/donor-home")
+	public String donorhome(Model model,Authentication authentication) {
+		
+		 authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+		// getUsername() - Returns the username used to authenticate the user.
+		System.out.println("User name: " + userDetails.getUsername()+" "+user1.findByEmail(userDetails.getUsername()).getInvite());
+
+		// getAuthorities() - Returns the authorities granted to the user.
+		System.out.println("User has authorities: " + userDetails.getAuthorities());
+		model.addAttribute("name",user1.findByEmail(userDetails.getUsername()).getFirstname());
+model.addAttribute("email",user1.findByEmail(userDetails.getUsername()).getEmail());
+model.addAttribute("city",user1.findByEmail(userDetails.getUsername()).getCity());
+model.addAttribute("phno",user1.findByEmail(userDetails.getUsername()).getPhno());
+model.addAttribute("bloodgroup",user1.findByEmail(userDetails.getUsername()).getBloodgroup());
+model.addAttribute("invite", user1.findByEmail(userDetails.getUsername()).getInvite());
+	return "login";
+	}
+	
+@RequestMapping("/hospital/hospital-login")
 	public String hospitallogin() {
 		return "hospital_login";
 	}
 
 	
 	
-	@RequestMapping("/hospital-home")
+	@RequestMapping("/hospital/hospital-home")
 	public String hospitalhome(Model model,@Param("keyword") String keyword) {
 		List<Donor> s1;
 		
@@ -70,7 +97,7 @@ public class HospitalLoginController {
 
 
 
-	public HospitalLoginController(DonorDetails user1, HospitalDetails h1) {
+	public LoginController(DonorDetails user1, HospitalDetails h1) {
 		super();
 		this.user1 = user1;
 		this.h1 = h1;

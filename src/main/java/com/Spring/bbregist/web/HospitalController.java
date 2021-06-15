@@ -12,7 +12,7 @@ import com.Spring.bbregist.Userservice.HospitalDetails;
 import com.Spring.bbregist.web.dto.Hospitaldao;
 
 @Controller
-@RequestMapping("/hospital/hospitalregistration")
+@RequestMapping("/hospitalregistration")
 public class HospitalController {
 
 	HospitalDetails h1;

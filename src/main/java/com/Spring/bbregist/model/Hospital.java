@@ -55,7 +55,16 @@ public class Hospital {
 	}
 
 
-
+public Hospital(Hospital h) {
+	this.h_id = h.getH_id();
+	this.name = h.getName();
+	this.email = h.getEmail();
+	this.city = h.getCity();
+	this.bloodgroupneeded = h.getBloodgroupneeded();
+	this.phno = h.getPhno();
+	this.password = h.getPassword();
+	this.roles = h.getRoles();
+}
 
 
 

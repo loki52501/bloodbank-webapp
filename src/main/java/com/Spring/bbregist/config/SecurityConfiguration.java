@@ -2,6 +2,7 @@ package com.Spring.bbregist.config;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.Spring.bbregist.Userservice.DonorDetails;
 import com.Spring.bbregist.Userservice.HospitalDetails;
+import com.Spring.bbregist.Userservice.MyUserDetailService;
 @EnableWebSecurity
 @Configuration
 	public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
@@ -27,7 +29,7 @@ import com.Spring.bbregist.Userservice.HospitalDetails;
 	@Order(2)
 	public static class userConfigure extends WebSecurityConfigurerAdapter {
 		@Autowired
-		private DonorDetails userService;
+		private MyUserDetailService userService;
 		
 		
 		
@@ -75,7 +77,7 @@ import com.Spring.bbregist.Userservice.HospitalDetails;
 		    }
 		    
 			@Autowired
-			private HospitalDetails hospitalService;
+			private MyUserDetailService hospitalService;
 			
 			
 			
@@ -97,14 +99,16 @@ import com.Spring.bbregist.Userservice.HospitalDetails;
 			protected void configure(HttpSecurity http)  throws Exception{
 				
 				
-				http.authorizeRequests().antMatchers("/**","/images/**","/css/**","/js/**","/css-table-17/**","/vendor/**").permitAll().anyRequest().authenticated()
-				.and().formLogin()
-				.loginPage("/hospital").defaultSuccessUrl("/hospital/hospital-home",true).permitAll().and()
+				http.authorizeRequests().antMatchers("/**").permitAll()
+				.and().antMatcher("/hospital/**").authorizeRequests().anyRequest().authenticated().
+				and().formLogin()
+				.loginPage("/hospital/hospital-login").defaultSuccessUrl("/hospital/hospital-home",true)
+				.permitAll().and()
 				.logout()
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)
-				.logoutRequestMatcher(new AntPathRequestMatcher("/hospital/logout"))
-				.logoutSuccessUrl("/hospital?logout")
+				.logoutRequestMatcher(new AntPathRequestMatcher("/hospital/hospital-login/logout"))
+				.logoutSuccessUrl("/hospital/hospital-login?logout")
 			.permitAll();
 				
 				http.csrf().disable();
