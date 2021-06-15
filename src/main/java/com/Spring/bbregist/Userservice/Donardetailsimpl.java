@@ -45,7 +45,19 @@ public Donor save(Donordto registrationDto, String name) {
 			Arrays.asList(new Role(name)),registrationDto.getInvite());
         return userRepository.save(user);
 	}
-
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+		Donor user= userRepository.findByEmail(username);
+		if(user==null) {
+			throw new UsernameNotFoundException("Invalid username or password.");
+			
+		}
+	return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),mapRolesToAuthorities(user.getRoles()));
+	
+	}
+private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role>roles){
+	return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRollname())).collect(Collectors.toList());
+}
 @Override
 public Donor findByEmail(String email) {
 	 

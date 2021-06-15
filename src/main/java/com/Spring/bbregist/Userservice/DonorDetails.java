@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;//it is 
 import com.Spring.bbregist.model.Donor;
 import com.Spring.bbregist.web.dto.Donordto;
 
-public interface DonorDetails {
+public interface DonorDetails extends UserDetailsService{
 	Donor findByEmail(String email);
 	 Donor save(Donordto d,String name); 
 	 List<Donor> findAll(String keyword) ;

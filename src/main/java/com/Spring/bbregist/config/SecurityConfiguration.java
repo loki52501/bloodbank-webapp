@@ -20,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.Spring.bbregist.Userservice.DonorDetails;
 import com.Spring.bbregist.Userservice.HospitalDetails;
-import com.Spring.bbregist.Userservice.MyUserDetailService;
+
 @EnableWebSecurity
 @Configuration
 	public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
@@ -29,7 +29,7 @@ import com.Spring.bbregist.Userservice.MyUserDetailService;
 	@Order(2)
 	public static class userConfigure extends WebSecurityConfigurerAdapter {
 		@Autowired
-		private MyUserDetailService userService;
+		private DonorDetails userService;
 		
 		
 		
@@ -77,7 +77,7 @@ import com.Spring.bbregist.Userservice.MyUserDetailService;
 		    }
 		    
 			@Autowired
-			private MyUserDetailService hospitalService;
+			private HospitalDetails hospitalService;
 			
 			
 			
