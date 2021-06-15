@@ -13,7 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Spring.bbregist.model.Hospital;
-import com.Spring.bbregist.model.Roleh;
+import com.Spring.bbregist.model.Role;
+
 import com.Spring.bbregist.repository.HospitalRepository;
 import com.Spring.bbregist.web.dto.Hospitaldao;
 
@@ -32,7 +33,7 @@ public Hospitaldetailsimpl(HospitalRepository userRepository) {
 }
 @Override
 public Hospital save(Hospitaldao registrationDto, String name)  {
-Hospital user =new Hospital(registrationDto.getName(),registrationDto.getEmail(),registrationDto.getCity(),registrationDto.getPhno(),passwordEncoder.encode(registrationDto.getPassword()),Arrays.asList(new Roleh(name)));
+Hospital user =new Hospital(registrationDto.getName(),registrationDto.getEmail(),registrationDto.getCity(),registrationDto.getPhno(),passwordEncoder.encode(registrationDto.getPassword()),Arrays.asList(new Role(name)));
     return userRepository.save(user);
 }
 @Override
@@ -43,12 +44,12 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 		throw new UsernameNotFoundException("Invalid username or password.");
 		
 	}
-	System.out.print(user.getEmail()+" "+user.getPassword());
+	System.out.print(user.getEmail()+" "+user.getPassword()+" ");
 return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),mapRolesToAuthorities(user.getRoles()));
 
 }
-private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Roleh>roles){
-return roles.stream().map(role -> new SimpleGrantedAuthority(role.getHrollname())).collect(Collectors.toList());
+private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role>roles){
+return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRollname())).collect(Collectors.toList());
 }
 @Override
 public Hospital findByEmail(String email) {

@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -43,10 +42,10 @@ public class Hospital {
 	private String password;
 	
 	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)//implemented to keep track of parent(user) and child(role) entity
-	@JoinTable(name = "hospitalpROLES",schema="blood_bank_registry",
+	@JoinTable(name = "hospital_ROLES",schema="blood_bank_registry",
 	joinColumns = @JoinColumn(name = "h_id"), 
-	inverseJoinColumns = @JoinColumn(name = "hr_id"))
-	Collection<Roleh> roles;
+	inverseJoinColumns = @JoinColumn(name = "r_id"))
+	Collection<Role> roles;
 	
 	
   
@@ -61,7 +60,7 @@ public class Hospital {
 
 
 	public Hospital(Long h_id, String name, String email, String city, String bloodgroupneeded, Long phno,
-			String password, Collection<Roleh> roles) {
+			String password, Collection<Role> roles) {
 		super();
 		this.h_id = h_id;
 		this.name = name;
@@ -75,7 +74,7 @@ public class Hospital {
 
 
 
-	public Hospital(String name, String email, String city, Long phno, String password, Collection<Roleh> roles) {
+	public Hospital(String name, String email, String city, Long phno, String password, Collection<Role> roles) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -88,7 +87,7 @@ public class Hospital {
 
 
 	public Hospital(String name, String email, String city, String bloodgroupneeded, Long phno, String password,
-			Collection<Roleh> roles) {
+			Collection<Role> roles) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -185,13 +184,13 @@ public class Hospital {
 
 
 
-	public Collection<Roleh> getRoles() {
+	public Collection<Role> getRoles() {
 		return roles;
 	}
 
 
 
-	public void setRoles(Collection<Roleh> roles) {
+	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
 	

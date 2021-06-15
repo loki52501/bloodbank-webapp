@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.Spring.bbregist.Userservice.DonorDetails;
 import com.Spring.bbregist.Userservice.HospitalDetails;
-
+@EnableWebSecurity
 @Configuration
 	public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
@@ -53,7 +53,7 @@ import com.Spring.bbregist.Userservice.HospitalDetails;
 		protected void configure(HttpSecurity http)  throws Exception{
 			
 			
-			http.authorizeRequests().antMatchers("/**","/hospital/**")
+			http.authorizeRequests().antMatchers("/**","/images/**","/css/**","/js/**","/css-table-17/**","/vendor/**")
 			.permitAll().anyRequest().authenticated()
 			.and().formLogin()
 			.loginPage("/donorlogin").defaultSuccessUrl("/donor-home").permitAll().and()
@@ -97,7 +97,7 @@ import com.Spring.bbregist.Userservice.HospitalDetails;
 			protected void configure(HttpSecurity http)  throws Exception{
 				
 				
-				http.authorizeRequests().antMatchers("/hospital/**","/**").permitAll().anyRequest().authenticated()
+				http.authorizeRequests().antMatchers("/**","/images/**","/css/**","/js/**","/css-table-17/**","/vendor/**").permitAll().anyRequest().authenticated()
 				.and().formLogin()
 				.loginPage("/hospital").defaultSuccessUrl("/hospital/hospital-home",true).permitAll().and()
 				.logout()

@@ -21,8 +21,8 @@ Donor deleteByEmail(String email);
 	List<Donor> findByCity(@Param("city") String city);
 
 
-	@Query("SELECT d FROM Donor d  WHERE CONCAT(d.firstname, ' ', d.bloodgroup, ' ', d.city, ' ', d.phno) LIKE %?1%")
-	List<Donor> search(String searchCity);
+	@Query("SELECT d FROM Donor d  WHERE lower(CONCAT(d.firstname, ' ', d.bloodgroup, ' ', d.city, ' ', d.phno)) LIKE lower(concat( '%',:keyword,'%'))")
+	List<Donor> search(@Param("keyword")String keyword);
 
 
 }

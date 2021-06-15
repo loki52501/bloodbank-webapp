@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Spring.bbregist.Userservice.DonorDetails;
 import com.Spring.bbregist.Userservice.HospitalDetails;
@@ -26,7 +27,7 @@ public class HospitalLoginController {
 	
 	@Autowired
 	DonorDetails user1;
-
+	Authentication authentication;
 	@Autowired
 	HospitalDetails h1;
 	@GetMapping
@@ -37,11 +38,11 @@ public class HospitalLoginController {
 	
 	
 	@RequestMapping("/hospital-home")
-	public String hospitalhome(Model model,@Param("city") String SearchCity,Authentication authentication) {
+	public String hospitalhome(Model model,@Param("keyword") String keyword) {
 		List<Donor> s1;
 		
 		
-		 s1=user1.findAll(SearchCity);
+		 s1=user1.findAll(keyword);
 		 
 		 for (Donor donor : s1) {
 			System.out.println(donor.getCity()+" hi "+donor.getBloodgroup()+" ");
@@ -49,7 +50,7 @@ public class HospitalLoginController {
 		}
 	
 		model.addAttribute("donors",s1);
-		model.addAttribute("SearchCity",SearchCity);
+		model.addAttribute("keyword",keyword);
 			 authentication = SecurityContextHolder.getContext().getAuthentication();
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		

@@ -11,9 +11,9 @@ import com.Spring.bbregist.web.dto.Donordto;
 public interface DonorDetails extends UserDetailsService{
 	Donor findByEmail(String email);
 	 Donor save(Donordto d,String name); 
-	 List<Donor> findAll(String SearchCity) ;
+	 List<Donor> findAll(String keyword) ;
 void deleteByEmail(String mail);
-	 List<Donor> findByCity(@Param("city") String city);
+	 List<Donor> findByCity( String keyword);
 	
 
 }

@@ -165,10 +165,10 @@ body {
         <input type="text" placeholder="Enter city name" th:field="*{city}" id="name-5a14" name="city" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-white" required="">
       </div>  <input type="submit" value="submit"  >
         </form>!-->
-      <form th:action="@{/hospital-home}">
-    Filter: <input type="text" name="SearchCity" id="SearchCity" size="50" th:value="${SearchCity}" required />
+      <form th:action="@{/hospital/hospital-home}" method=get>
+    Filter: <input style="color:black;" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"  />
     &nbsp;
-    <input type="submit" style="color:black;" value="Search" />
+    <input type="submit" style="color:black;" value="Search" >
 </form>
        
      

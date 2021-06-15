@@ -64,9 +64,9 @@ public Donor findByEmail(String email) {
 	return userRepository.findByEmail(email);
 }
 
-public List<Donor> findAll(String SearchCity) {
-	if(SearchCity!=null) {
-		return userRepository.search(SearchCity);
+public List<Donor> findAll(String keyword) {
+	if(keyword!=null) {
+		return userRepository.search(keyword);
 	}
 	// TODO Auto-generated method stub
 	return userRepository.findAll();
