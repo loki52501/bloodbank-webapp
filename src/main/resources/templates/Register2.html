@@ -215,20 +215,15 @@ th:href="@{/donorregistration}" style="padding: 10px 20px;">User Registeration</
 						to our awesome app!</div>
 				</div>
                     <form th:action="@{/hospitalregistration}" method="POST" th:object="${hospital}">
-                    					<!-- error message -->
-	<div th:if="${param.error}">
-	<div class="alert alert-danger"> Invalid username or email
-	</div>
-	</div>
-	<!-- logout message -->
-                    
+  
                     
                         <div class="input-group">
                             <input class="input--style-2" type="text" placeholder="Hospital Name" name="hospitalname" th:field="*{name}" required autofocus>
                         </div>
                        
                         <div class="input-group">
-                            <input class="input--style-2" type="email" placeholder="Email ID" name="email" th:field="*{email}" required autofocus>
+                            <input class="input--style-2" type="email"  placeholder="Email ID" name="email" th:field="*{email}" required autofocus>
+                             <p class="alert alert-danger" th:each="error:${#fields.errors('email')}" th:text="${error}">Validation error</p>
                         </div>
                     
                                 <div class="input-group">

@@ -23,8 +23,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-
-@Transactional
 public class Donardetailsimpl  implements DonorDetails {
 		
 	@Autowired
@@ -32,10 +30,13 @@ public class Donardetailsimpl  implements DonorDetails {
 	
 	@Autowired
 	private DonorRepository userRepository;
+	
 	public Donardetailsimpl(DonorRepository userRepository) {
 		super();
 		this.userRepository = userRepository;
 	}
+	
+	
 	@Override
 public Donor save(Donordto registrationDto, String name) {
 	Donor user =new Donor(registrationDto.getFirstname(),registrationDto.getLastname(),registrationDto.getEmail(),registrationDto.getDob()
@@ -45,6 +46,8 @@ public Donor save(Donordto registrationDto, String name) {
 			Arrays.asList(new Role(name)),registrationDto.getInvite());
         return userRepository.save(user);
 	}
+	
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 		Donor user= userRepository.findByEmail(username);
@@ -55,9 +58,13 @@ public Donor save(Donordto registrationDto, String name) {
 	return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),mapRolesToAuthorities(user.getRoles()));
 	
 	}
+	
+	
 private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role>roles){
 	return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRollname())).collect(Collectors.toList());
 }
+
+
 @Override
 public Donor findByEmail(String email) {
 	 
@@ -71,14 +78,33 @@ public List<Donor> findAll(String keyword) {
 	// TODO Auto-generated method stub
 	return userRepository.findAll();
 }
+
 @Override
 public List<Donor> findByCity(String city) {
 	// TODO Auto-generated method stub
 	return userRepository.findByCity(city);
 }
+
+
 @Override
 public void deleteByEmail(String mail) {
 	userRepository.deleteByEmail(mail);
+}
+
+
+@Override
+public void UpdateInvite(String email) {
+ 
+	userRepository.UpdateInvite(email);
+	
+}
+
+
+@Override
+public void UpdateInviteany(String email) {
+	
+	userRepository.UpdateInviteany(email);
+	
 }
 
 

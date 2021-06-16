@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,8 +34,11 @@ public class LoginController {
 	
 	@RequestMapping("/donorlogin")
 	public String donorlogin() {
-		return "user_login";
-	}
+		
+	 
+	        return "user_login";
+	    }
+	  
 	
 	
 	@RequestMapping("/donor-home")

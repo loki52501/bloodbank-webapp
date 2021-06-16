@@ -27,15 +27,19 @@ BCryptPasswordEncoder passwordEncoder;
 
 @Autowired
 private HospitalRepository userRepository;
+
 public Hospitaldetailsimpl(HospitalRepository userRepository) {
 	super();
 	this.userRepository = userRepository;
 }
+
+
 @Override
 public Hospital save(Hospitaldao registrationDto, String name)  {
 Hospital user =new Hospital(registrationDto.getName(),registrationDto.getEmail(),registrationDto.getCity(),registrationDto.getPhno(),passwordEncoder.encode(registrationDto.getPassword()),Arrays.asList(new Role(name)));
     return userRepository.save(user);
 }
+
 @Override
 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 	Hospital user= userRepository.findByEmail(username);
@@ -48,9 +52,12 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),mapRolesToAuthorities(user.getRoles()));
 
 }
+
+
 private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role>roles){
 return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRollname())).collect(Collectors.toList());
 }
+
 @Override
 public Hospital findByEmail(String email) {
 	

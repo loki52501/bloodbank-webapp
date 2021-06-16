@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import com.Spring.bbregist.model.Hospital;
 
 public interface HospitalRepository extends JpaRepository<Hospital,Integer> {
+	
+	
 	Hospital findByEmail(String email);
 	
 	@Query("SELECT h FROM Hospital h WHERE h.email=:email")

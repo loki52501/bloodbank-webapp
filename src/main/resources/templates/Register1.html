@@ -217,19 +217,16 @@ th:href="@{/donorregistration}" style="padding: 10px 20px;">User Registeration</
 				</div>
                     <form th:action="@{/donorregistration}" method="POST" th:object="${donor}">
                     					<!-- error message -->
-	<div th:if="${param.error}">
-	<div class="alert alert-danger"> Invalid username or email
-	</div>
-	</div>
-	<!-- logout message -->
+
                         <div class="input-group">
                             <input class="input--style-2" type="text" placeholder="First Name" name="firstname" th:field="*{firstname}" required>
                         </div>
                         <div class="input-group">
                             <input class="input--style-2" type="text" placeholder="Last Name" name="lastname" th:field="*{lastname}" required>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group" >
                             <input class="input--style-2" type="email" placeholder="Email ID" name="email" th:field="*{email}" required>
+                        <p class="alert alert-danger" th:each="error:${#fields.errors('email')}" th:text="${error}">Validation error</p>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">

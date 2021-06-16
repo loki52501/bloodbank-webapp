@@ -10,6 +10,7 @@ import javax.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.Spring.bbregist.web.dto.Donordto;
+import com.sun.istack.NotNull;
 
 
 @Entity
@@ -66,6 +67,7 @@ joinColumns = @JoinColumn(name = "d_id"),
 inverseJoinColumns = @JoinColumn(name = "r_id"))
 Collection<Role> roles;
 
+@NotNull
 private Long invite;
 
 

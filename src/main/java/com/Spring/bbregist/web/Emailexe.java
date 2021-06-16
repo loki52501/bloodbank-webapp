@@ -25,7 +25,11 @@ public class Emailexe {
 	@GetMapping("/hospital-home/{email}/{phno}")
 	public String getCustomerByFirstName(@PathVariable(name="email") String email,@PathVariable(name="phno") String phno) throws AddressException, MessagingException, IOException {
 		Donor r = s.findByEmail(email);
-	
+		
+		if(r.getInvite()==null)
+	         s.UpdateInvite(email);
+		else
+	s.UpdateInviteany(email);
 		
 		EmailController t  = new EmailController();
 		System.out.println(r.getEmail());
