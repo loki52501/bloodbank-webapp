@@ -100,7 +100,7 @@ import com.Spring.bbregist.Userservice.HospitalDetails;
 				
 				
 				http.authorizeRequests().antMatchers("/**").permitAll()
-				.and().antMatcher("/hospital/**").authorizeRequests().anyRequest().authenticated().
+				.and().antMatcher("/hospital/**").authorizeRequests().anyRequest().hasAuthority("Hospital").
 				and().formLogin()
 				.loginPage("/hospital/hospital-login").defaultSuccessUrl("/hospital/hospital-home",true)
 				.permitAll().and()

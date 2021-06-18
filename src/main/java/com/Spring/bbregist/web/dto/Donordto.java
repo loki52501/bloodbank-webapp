@@ -1,12 +1,14 @@
 package com.Spring.bbregist.web.dto;
 
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import com.Spring.bbregist.model.Donor;
 import com.Spring.bbregist.model.Role;
+import com.sun.istack.NotNull;
 
 public class Donordto {
 
@@ -29,10 +31,46 @@ public class Donordto {
 
     private String gender;
     
-    private int donated;
+    private Long donated;
 	
 
 private Long invite;
+
+@NotNull
+private LocalDate invitedate;
+
+private LocalDate donateddate;
+
+public LocalDate getDonateddate() {
+	return donateddate;
+}
+
+public void setDonateddate(LocalDate donateddate) {
+	this.donateddate = donateddate;
+}
+
+public Donordto(String firstname, String lastname, String email, String ad1, String ad2, String gender, Long donated,
+		Long invite, LocalDate invitedate, LocalDate donateddate, String state, String city, String bloodgroup,
+		Long phno, Date dob, String password, Collection<Role> roles) {
+	super();
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.email = email;
+	this.ad1 = ad1;
+	this.ad2 = ad2;
+	this.gender = gender;
+	this.donated = donated;
+	this.invite = invite;
+	this.invitedate = invitedate;
+	this.donateddate = donateddate;
+	this.state = state;
+	this.city = city;
+	this.bloodgroup = bloodgroup;
+	this.phno = phno;
+	this.dob = dob;
+	this.password = password;
+	this.roles = roles;
+}
 
 public Donordto(Donor d) {
 	
@@ -50,7 +88,16 @@ public Donordto(Donor d) {
 	this.dob = d.getDob();
 	this.password = d.getPassword();
 	this.roles = d.getRoles();
+	this.invitedate=d.getInvitedate();
 	
+}
+
+	public LocalDate getInvitedate() {
+	return invitedate;
+}
+
+public void setInvitedate(LocalDate invitedate) {
+	this.invitedate = invitedate;
 }
 
 	public Donordto(String firstname, String lastname, String email, String ad1, String ad2, String gender, 
@@ -120,7 +167,7 @@ public Donordto(Donor d) {
 		this.roles = roles;
 	}
 
-	public Donordto(String firstname, String lastname, String email, String ad1, String ad2, String gender, int donated,
+	public Donordto(String firstname, String lastname, String email, String ad1, String ad2, String gender, Long donated,
 			String state, String city, String bloodgroup, Long phno, Date dob, String password, Collection<Role> roles) {
 		super();
 		this.firstname = firstname;
@@ -169,11 +216,11 @@ public Donordto(Donor d) {
 		this.gender = gender;
 	}
 
-	public int getDonated() {
+	public Long getDonated() {
 		return donated;
 	}
 
-	public void setDonated(int donated) {
+	public void setDonated(Long donated) {
 		this.donated = donated;
 	}
 

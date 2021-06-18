@@ -1,6 +1,13 @@
 package com.Spring.bbregist.web;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -22,21 +29,53 @@ public class Emailexe {
 	@Autowired
 	DonorDetails s;
 	
-	@GetMapping("/hospital-home/{email}/{phno}")
-	public String getCustomerByFirstName(@PathVariable(name="email") String email,@PathVariable(name="phno") String phno) throws AddressException, MessagingException, IOException {
+	@GetMapping("/hospital-home/{email}")
+	public String getCustomerByFirstName(@PathVariable(name="email") String email) throws AddressException, MessagingException, IOException {
 		Donor r = s.findByEmail(email);
 		
-		if(r.getInvite()==null)
-	         s.UpdateInvite(email);
-		else
-	s.UpdateInviteany(email);
+		LocalDate today = LocalDate.now();
 		
+		int month = today.getMonthValue();
+		
+		LocalDate lastinvite=r.getInvitedate();
+	    
+	
+		if(r.getInvite()==null)
+		{
+	         s.UpdateInvite(email);
+		s.UpdateInvitetime(email);
 		EmailController t  = new EmailController();
-		System.out.println(r.getEmail());
+		System.out.println(r.getEmail()+" hi  ");
 		t.sendmail(r.getEmail(),r.getFirstname());
 		Long i=(long) 1;
 		r.setInvite( i);
-		System.out.println(r.getInvite()+" "+ phno);
+		System.out.println(r.getInvite()+" ");
+		return "<h1>Successfullysent</h1>";
+		}
+		else if(r.getInvite()!=null){
+
+			Period period=Period.between(today, lastinvite);
+	
+				s.UpdateInviteany(email);
+				s.UpdateInvitetime(email);
+				EmailController t  = new EmailController();
+				System.out.println(r.getEmail()+" hi  ");
+				t.sendmail(r.getEmail(),r.getFirstname());
+				Long i=(long) 1;
+				r.setInvite( i);
+				System.out.println(r.getInvite()+" ");
+				
+			
+			return "<h1>Successfully hi sent</h1>";
+		}
+			
+		else {
+			return "<h1>email not send since the donar has not finished his monthly rest</h1>";
+				
+			
+		}
+	
+		
 		
 		/*for (int i = 0; i < r.size(); i++) {
 			
@@ -53,8 +92,8 @@ public class Emailexe {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}*/
+	
 		
-		return "<h1>Successfullysent</h1>";
-		}  
+	
 		
-}
+	}}

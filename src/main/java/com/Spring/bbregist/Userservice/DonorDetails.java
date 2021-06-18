@@ -26,5 +26,7 @@ public interface DonorDetails extends UserDetailsService{
 	
 	void UpdateInviteany(@Param("email") String email);
 	
+	void UpdateInvitetime(@Param("email")String email);
+	
 
 }

@@ -40,11 +40,12 @@ public class Donardetailsimpl  implements DonorDetails {
 	@Override
 public Donor save(Donordto registrationDto, String name) {
 	Donor user =new Donor(registrationDto.getFirstname(),registrationDto.getLastname(),registrationDto.getEmail(),registrationDto.getDob()
-			,registrationDto.getGender(),registrationDto.getAd1(),registrationDto.getAd2(),registrationDto.getState(),registrationDto.getCity(),
+			,registrationDto.getGender(),registrationDto.getDonated(),registrationDto.getAd1(),registrationDto.getAd2(),registrationDto.getState(),registrationDto.getCity(),
 			registrationDto.getBloodgroup(),
 			registrationDto.getPhno(),passwordEncoder.encode(registrationDto.getPassword()),
-			Arrays.asList(new Role(name)),registrationDto.getInvite());
-        return userRepository.save(user);
+			Arrays.asList(new Role(name)),registrationDto.getInvite(),registrationDto.getInvitedate(),registrationDto.getDonateddate());
+
+	return userRepository.save(user);
 	}
 	
 	
@@ -105,6 +106,12 @@ public void UpdateInviteany(String email) {
 	
 	userRepository.UpdateInviteany(email);
 	
+}
+
+
+@Override
+public void UpdateInvitetime(String email) {
+	userRepository.UpdateInvitetime(email);
 }
 
 

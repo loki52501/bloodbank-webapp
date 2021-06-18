@@ -28,15 +28,16 @@ public class LoginController {
 	
 	@Autowired
 	DonorDetails user1;
-	Authentication authentication;
+
 	@Autowired
 	HospitalDetails h1;
 	
 	@RequestMapping("/donorlogin")
 	public String donorlogin() {
-		
+
+	return "user_login";
 	 
-	        return "user_login";
+
 	    }
 	  
 	
@@ -58,6 +59,9 @@ model.addAttribute("city",user1.findByEmail(userDetails.getUsername()).getCity()
 model.addAttribute("phno",user1.findByEmail(userDetails.getUsername()).getPhno());
 model.addAttribute("bloodgroup",user1.findByEmail(userDetails.getUsername()).getBloodgroup());
 model.addAttribute("invite", user1.findByEmail(userDetails.getUsername()).getInvite());
+
+
+
 	return "login";
 	}
 	
@@ -82,7 +86,7 @@ model.addAttribute("invite", user1.findByEmail(userDetails.getUsername()).getInv
 	
 		model.addAttribute("donors",s1);
 		model.addAttribute("keyword",keyword);
-			 authentication = SecurityContextHolder.getContext().getAuthentication();
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		
 			//model.addAttribute("city",s1);
@@ -106,5 +110,8 @@ model.addAttribute("invite", user1.findByEmail(userDetails.getUsername()).getInv
 		this.user1 = user1;
 		this.h1 = h1;
 	}
+	
+	
+
 
 }

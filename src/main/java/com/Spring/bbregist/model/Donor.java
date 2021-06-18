@@ -1,6 +1,7 @@
 package com.Spring.bbregist.model;
 
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -20,39 +21,54 @@ public class Donor {
 @GeneratedValue(strategy =  GenerationType.IDENTITY)
 private Long d_id;
 
+@NotNull
 @Column(name="fname")
 private String firstname;
 
+@NotNull
 @Column(name="lname")
 private String lastname;
 
+@NotNull
 @Column(name="email",unique = true)
 private String email;
-@DateTimeFormat(pattern = "dd/MM/yyyy")
+
+@NotNull
+@DateTimeFormat(pattern = "dd-MM-yyyy")
 @Column(name="dob")
 private Date dob;
 
+@NotNull
 @Column(name="gender")
 private String gender;
 
+@NotNull
 @Column(name="donated")
-private int donated;
+private Long donated;
 
+@NotNull
 @Column(name="address1")
 private String ad1;
 
+@NotNull
 @Column(name="address2")
 private String ad2;
 
+
+@NotNull
 @Column(name="state")
 private String state;
 
+@NotNull
 @Column(name="city")
 private String city;
 
+
+@NotNull
 @Column(name="bg")
 private String bloodgroup;
 
+@NotNull
 @Column(name="phno")
 private Long phno;
 
@@ -70,6 +86,77 @@ Collection<Role> roles;
 @NotNull
 private Long invite;
 
+@NotNull
+private LocalDate invitedate;
+
+@NotNull
+private LocalDate donateddate;
+
+public Donor(String firstname, String lastname, String email, Date dob, String gender, Long donated, String ad1,
+		String ad2, String state, String city, String bloodgroup, Long phno, String password, Collection<Role> roles,
+		Long invite, LocalDate invitedate, LocalDate donateddate) {
+	super();
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.email = email;
+	this.dob = dob;
+	this.gender = gender;
+	this.donated = donated;
+	this.ad1 = ad1;
+	this.ad2 = ad2;
+	this.state = state;
+	this.city = city;
+	this.bloodgroup = bloodgroup;
+	this.phno = phno;
+	this.password = password;
+	this.roles = roles;
+	this.invite = invite;
+	this.invitedate = invitedate;
+	this.donateddate = donateddate;
+}
+
+
+public LocalDate getDonateddate() {
+	return donateddate;
+}
+
+
+public void setDonateddate(LocalDate donateddate) {
+	this.donateddate = donateddate;
+}
+
+
+public LocalDate getInvitedate() {
+	return invitedate;
+}
+
+
+public void setInvitedate(LocalDate invitedate) {
+	this.invitedate = invitedate;
+}
+
+
+public Donor(String firstname, String lastname, String email, Date dob, String gender,Long donated, String ad1,
+		String ad2, String state, String city, String bloodgroup, Long phno, String password, Collection<Role> roles,
+		Long invite, LocalDate invitedate) {
+	super();
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.email = email;
+	this.dob = dob;
+	this.gender = gender;
+	this.donated = donated;
+	this.ad1 = ad1;
+	this.ad2 = ad2;
+	this.state = state;
+	this.city = city;
+	this.bloodgroup = bloodgroup;
+	this.phno = phno;
+	this.password = password;
+	this.roles = roles;
+	this.invite = invite;
+	this.invitedate = invitedate;
+}
 
 
 public Donor(Donor d)
@@ -119,7 +206,7 @@ public void setInvite(Long invite) {
 	this.invite = invite;
 }
 
-public Donor(String firstname, String lastname, String email, Date dob, String gender, int donated, String ad1,
+public Donor(String firstname, String lastname, String email, Date dob, String gender, Long donated, String ad1,
 		String ad2, String state, String city, String bloodgroup, Long phno, String password, Collection<Role> roles) {
 	super();
 	this.firstname = firstname;
@@ -236,11 +323,11 @@ public void setGender(String gender) {
 	this.gender = gender;
 }
 
-public int getDonated() {
+public Long getDonated() {
 	return donated;
 }
 
-public void setDonated(int donated) {
+public void setDonated(Long donated) {
 	this.donated = donated;
 }
 

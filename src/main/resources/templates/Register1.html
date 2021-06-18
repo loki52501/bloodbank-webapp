@@ -231,7 +231,7 @@ th:href="@{/donorregistration}" style="padding: 10px 20px;">User Registeration</
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <input class="input--style-2 js-datepicker" type="text" placeholder="Date of birth" name="dob" th:field="*{dob}" required autofocus>
+                                    <input class="input--style-2 js-datepicker" type="text" placeholder="Date of birth" max="2003/12/31" name="dob" th:field="*{dob}" required autofocus>
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>

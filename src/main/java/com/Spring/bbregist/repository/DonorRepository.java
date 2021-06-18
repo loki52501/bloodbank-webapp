@@ -19,7 +19,13 @@ public interface DonorRepository extends JpaRepository<Donor,Integer>{
 	 
 	List<Donor> findAll() ;
 
-	 
+	@Modifying
+	@Transactional 
+	@Query(value="UPDATE blood_bank_registry.donor\r\n"
+			+ "	SET  invitedate= current_timestamp\r\n"
+			+ "	WHERE email=:email",nativeQuery = true) 
+	void UpdateInvitetime(@Param("email")String email);
+	
 	Donor deleteByEmail(String email);
 	
 	@Query("SELECT d FROM Donor d WHERE d.city=:city")
@@ -44,4 +50,6 @@ public interface DonorRepository extends JpaRepository<Donor,Integer>{
 			+ "	SET  invite= invite +1\r\n"
 			+ "	WHERE email=:email",nativeQuery = true)
 	void UpdateInviteany(@Param("email") String email);
+	
+	
 }
