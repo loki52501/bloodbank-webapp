@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="hospital",schema="blood_bank_registry")
+@Table(name="hospital",schema="spl")
 public class Hospital {
 
 	@Id
@@ -42,16 +42,41 @@ public class Hospital {
 	private String password;
 	
 	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)//implemented to keep track of parent(user) and child(role) entity
-	@JoinTable(name = "hospital_ROLES",schema="blood_bank_registry",
+	@JoinTable(name = "hospital_ROLES",schema="spl",
 	joinColumns = @JoinColumn(name = "h_id"), 
 	inverseJoinColumns = @JoinColumn(name = "r_id"))
 	Collection<Role> roles;
 	
-	
-  
+	@Column(name="enabled")
+	  private boolean isEnabled;
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
 
 	public Hospital() {
 		super();
+		
+	}
+
+
+public Hospital(String name, String email, String city,  Long phno, String password,
+			Collection<Role> roles, boolean isEnabled) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.city = city;
+		
+		this.phno = phno;
+		this.password = password;
+		this.roles = roles;
+		this.isEnabled = isEnabled;
 	}
 
 

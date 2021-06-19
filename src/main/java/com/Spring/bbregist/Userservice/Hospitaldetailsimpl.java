@@ -43,8 +43,9 @@ Hospital user =new Hospital(registrationDto.getName(),registrationDto.getEmail()
 @Override
 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 	Hospital user= userRepository.findByEmail(username);
-	System.out.print(userRepository.findAll().size()+"hiii ");
-	if(user==null) {
+
+	if(user==null||user.isEnabled()==false) {
+		System.out.print(userRepository.findAll().size()+"hiii ");
 		throw new UsernameNotFoundException("Invalid username or password.");
 		
 	}
@@ -63,7 +64,11 @@ public Hospital findByEmail(String email) {
 	
 	return userRepository.findByEmail(email);
 }
-
+@Override
+public void UpdateEnable(String email) {
+	userRepository.UpdateEnable(email);
+	
+}
 
 
 }

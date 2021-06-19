@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Spring.bbregist.Userservice.DonorDetails;
 import com.Spring.bbregist.Userservice.HospitalDetails;
 import com.Spring.bbregist.model.Donor;
+import com.Spring.bbregist.model.Hospital;
 
 
 @Controller
@@ -59,8 +60,8 @@ model.addAttribute("city",user1.findByEmail(userDetails.getUsername()).getCity()
 model.addAttribute("phno",user1.findByEmail(userDetails.getUsername()).getPhno());
 model.addAttribute("bloodgroup",user1.findByEmail(userDetails.getUsername()).getBloodgroup());
 model.addAttribute("invite", user1.findByEmail(userDetails.getUsername()).getInvite());
-
-
+model.addAttribute("donatetime", user1.findByEmail(userDetails.getUsername()).getDonateddate());
+model.addAttribute("donated",  user1.findByEmail(userDetails.getUsername()).getDonated());
 
 	return "login";
 	}
@@ -88,15 +89,15 @@ model.addAttribute("invite", user1.findByEmail(userDetails.getUsername()).getInv
 		model.addAttribute("keyword",keyword);
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		
+			Hospital h=h1.findByEmail(userDetails.getUsername());
 			//model.addAttribute("city",s1);
 			// getUsername() - Returns the username used to authenticate the user.
 			System.out.println("User name: " + userDetails.getUsername()+" ");
 
 			// getAuthorities() - Returns the authorities granted to the user.
 			System.out.println("User has authorities: " + userDetails.getAuthorities()+" "+h1);
-			model.addAttribute("name",h1.findByEmail(userDetails.getUsername()).getName());
-            model.addAttribute("phno",h1.findByEmail(userDetails.getUsername()).getPhno());
+			model.addAttribute("name",h.getName());
+            model.addAttribute("h",h);
 		//model.addAttribute("donors",l);
 		return "login1";
 	}

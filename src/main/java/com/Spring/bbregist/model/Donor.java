@@ -15,7 +15,7 @@ import com.sun.istack.NotNull;
 
 
 @Entity
-@Table(name="donor",schema="blood_bank_registry")
+@Table(name="donor",schema="spl")
 public class Donor {
 @Id
 @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -78,7 +78,7 @@ private Long phno;
 private String password;
 
 @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)//implemented to keep track of parent(user) and child(role) entity
-@JoinTable(name = "user_ROLES",schema="blood_bank_registry",
+@JoinTable(name = "user_ROLES",schema="spl",
 joinColumns = @JoinColumn(name = "d_id"), 
 inverseJoinColumns = @JoinColumn(name = "r_id"))
 Collection<Role> roles;

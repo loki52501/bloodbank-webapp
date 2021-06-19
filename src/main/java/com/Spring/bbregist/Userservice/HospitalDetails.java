@@ -1,5 +1,6 @@
 package com.Spring.bbregist.Userservice;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.Spring.bbregist.model.Hospital;
@@ -12,5 +13,7 @@ public interface HospitalDetails extends UserDetailsService{
 	
 	
 	Hospital findByEmail(String email);
+	
+	 void UpdateEnable(@Param("email")String email);
 
 }

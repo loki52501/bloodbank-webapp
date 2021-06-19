@@ -52,14 +52,14 @@ public class EmailController {
 	   
 	   Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 	      protected PasswordAuthentication getPasswordAuthentication() {
-	         return new PasswordAuthentication("velvetthunder05@gmail.com", "1Kevin23");
+	         return new PasswordAuthentication("splblooddonorfinder@gmail.com", "savelives");
 	      }
 	   });
 	   Message msg = new MimeMessage(session);
-	   msg.setFrom(new InternetAddress("velvetthunder05@gmail.com", false));
+	   msg.setFrom(new InternetAddress("splblooddonorfinder@gmail.com", false));
 
 	   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-	   msg.setSubject("Hi"+name);
+	   msg.setSubject("Hi");
 	   msg.setContent("we need your hand in saving the lives of people come and join us, Don't miss your chance", "text/html");
 	   msg.setSentDate(new Date());
 
@@ -68,7 +68,7 @@ public class EmailController {
 	   		+ "we are glad to have you "
 	   		+ "from,"
 	   		+ "slp hospital"
-	   		+ "contact if intrested.", "text/html");
+	   		+ "contact if intrested."+name, "text/html");
 
 	   Multipart multipart = new MimeMultipart();
 	   multipart.addBodyPart(messageBodyPart);

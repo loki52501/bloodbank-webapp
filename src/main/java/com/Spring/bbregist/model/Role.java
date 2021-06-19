@@ -3,7 +3,7 @@ package com.Spring.bbregist.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="role", schema="blood_bank_registry")
+@Table(name="role", schema="spl")
 public class Role {
 
 	@Id

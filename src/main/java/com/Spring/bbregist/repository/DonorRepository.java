@@ -21,7 +21,7 @@ public interface DonorRepository extends JpaRepository<Donor,Integer>{
 
 	@Modifying
 	@Transactional 
-	@Query(value="UPDATE blood_bank_registry.donor\r\n"
+	@Query(value="UPDATE spl.donor\r\n"
 			+ "	SET  invitedate= current_timestamp\r\n"
 			+ "	WHERE email=:email",nativeQuery = true) 
 	void UpdateInvitetime(@Param("email")String email);
@@ -39,14 +39,14 @@ public interface DonorRepository extends JpaRepository<Donor,Integer>{
 
 	@Modifying
 	@Transactional 
-	@Query(value="UPDATE blood_bank_registry.donor\r\n"
+	@Query(value="UPDATE spl.donor\r\n"
 			+ "	SET  invite= 1\r\n"
 			+ "	WHERE email=:email",nativeQuery = true)
     void UpdateInvite(@Param("email")String email);
 	
 	@Modifying
 	@Transactional 
-	@Query(value="UPDATE blood_bank_registry.donor\r\n"
+	@Query(value="UPDATE spl.donor\r\n"
 			+ "	SET  invite= invite +1\r\n"
 			+ "	WHERE email=:email",nativeQuery = true)
 	void UpdateInviteany(@Param("email") String email);

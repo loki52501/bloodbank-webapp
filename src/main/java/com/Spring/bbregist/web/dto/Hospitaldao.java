@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.Spring.bbregist.model.Hospital;
 import com.Spring.bbregist.model.Role;
 
 public class Hospitaldao {
@@ -36,12 +37,39 @@ public class Hospitaldao {
 
 	Collection<Role> roles;
 	
-	
+ private boolean isEnabled;
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
 
 	public Hospitaldao() {
 		super();
 	}
 
+	
+	
+	public Hospitaldao(Hospital h) {
+		super();
+	
+		this.name = h.getName();
+		this.email = h.getEmail();
+		this.city = h.getCity();
+		this.phno = h.getPhno();
+		this.password = h.getPassword();
+		this.roles = h.getRoles();
+		this.isEnabled=h.isEnabled();
+	
+	}
+	
+	
+	
+	
 	public Hospitaldao(String name, String email, String city, Long phno, String password, Collection<Role> roles) {
 		super();
 		this.name = name;

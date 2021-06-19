@@ -62,7 +62,7 @@ public class DonorregistController {
 	@PostMapping
  public String registerUserAccount(@ModelAttribute("donor") Donordto registrationDto, BindingResult result)
 	 {
-		if(d1.findByEmail(registrationDto.getEmail()) != null )
+		if(d1.findByEmail(registrationDto.getEmail()) != null||  h1.findByEmail(registrationDto.getEmail())!=null) 
 			result.rejectValue("email", null,"There is already an account registered with the email");
 		
 
