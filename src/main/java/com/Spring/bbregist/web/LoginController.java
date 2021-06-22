@@ -2,8 +2,11 @@ package com.Spring.bbregist.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,8 +17,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import com.Spring.bbregist.Userservice.DonorDetails;
 import com.Spring.bbregist.Userservice.HospitalDetails;
@@ -62,9 +67,38 @@ model.addAttribute("bloodgroup",user1.findByEmail(userDetails.getUsername()).get
 model.addAttribute("invite", user1.findByEmail(userDetails.getUsername()).getInvite());
 model.addAttribute("donatetime", user1.findByEmail(userDetails.getUsername()).getDonateddate());
 model.addAttribute("donated",  user1.findByEmail(userDetails.getUsername()).getDonated());
-
+model.addAttribute("daccept",user1.findByEmail(userDetails.getUsername()).getDaccepted() );
 	return "login";
 	}
+
+	@PostMapping("/donor-home")
+	public String donoraccept(HttpServletRequest req,Authentication authentication) {
+		
+
+		 authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		String email=userDetails.getUsername();
+		String dac=req.getParameter("action");
+		System.out.println(dac+" like ");
+		if(dac.matches("ACCEPT"))
+		{
+
+			user1.UpdateDaccept(email);
+			System.out.println("hik accept");
+			return "redirect:/donor-home?accept"; 
+			
+		}
+		else if(dac.matches("DECLINE"))
+		{
+			System.out.println("hik decline");
+			user1.UpdateDdecline(email);
+			return "redirect:/donor-home?decline"; 
+		}
+		else
+			return "redirect:/donor-home"; 
+		
+	}
+	
 	
 @RequestMapping("/hospital/hospital-login")
 	public String hospitallogin() {

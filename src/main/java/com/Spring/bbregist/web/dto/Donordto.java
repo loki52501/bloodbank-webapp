@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import com.Spring.bbregist.model.Donor;
 import com.Spring.bbregist.model.Role;
 import com.sun.istack.NotNull;
@@ -40,6 +42,44 @@ private Long invite;
 private LocalDate invitedate;
 
 private LocalDate donateddate;
+
+
+@NotNull
+@Column(name="daccepted")
+private Long daccepted;
+
+
+public Long getDaccepted() {
+	return daccepted;
+}
+
+public void setDaccepted(Long daccepted) {
+	this.daccepted = daccepted;
+}
+
+public Donordto(String firstname, String lastname, String email, String ad1, String ad2, String gender, Long donated,
+		Long invite, LocalDate invitedate, LocalDate donateddate, Long daccepted, String state, String city,
+		String bloodgroup, Long phno, Date dob, String password, Collection<Role> roles) {
+	super();
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.email = email;
+	this.ad1 = ad1;
+	this.ad2 = ad2;
+	this.gender = gender;
+	this.donated = donated;
+	this.invite = invite;
+	this.invitedate = invitedate;
+	this.donateddate = donateddate;
+	this.daccepted = daccepted;
+	this.state = state;
+	this.city = city;
+	this.bloodgroup = bloodgroup;
+	this.phno = phno;
+	this.dob = dob;
+	this.password = password;
+	this.roles = roles;
+}
 
 public LocalDate getDonateddate() {
 	return donateddate;

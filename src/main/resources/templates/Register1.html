@@ -288,6 +288,10 @@ th:href="@{/donorregistration}" style="padding: 10px 20px;">User Registeration</
             
                                                 </div>
              
+                                                    <div class="input-group">
+                                                <input class="input--style-2" type="password" placeholder="confirm password" id="cpassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="cpassword"  required autofocus>
+            
+                                                </div>
 
                                                     <div class="p-t-30">
                                                         <button class="btn btn--radius btn--green" type="submit" name="register">Register</button>
@@ -313,7 +317,21 @@ th:href="@{/donorregistration}" style="padding: 10px 20px;">User Registeration</
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
+ <script>
+      var password = document.getElementById("password")
+      , confirm_password = document.getElementById("cpassword");
 
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+    </script>
 </body>
 
 </html>

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.Spring.bbregist.Userservice.DonorDetails;
 import com.Spring.bbregist.model.Donor;
@@ -24,13 +25,13 @@ import com.Spring.bbregist.model.Hospital;
 import com.Spring.bbregist.web.dto.Donordto;
 
 @RestController
-public class Emailexe {
+public class Inviteexe {
 
 	@Autowired
 	DonorDetails s;
 	
 	@GetMapping("/hospital-home/{email}")
-	public String getCustomerByFirstName(@PathVariable(name="email") String email) throws AddressException, MessagingException, IOException {
+	public ModelAndView getCustomerByFirstName(@PathVariable(name="email") String email,ModelAndView mvw) throws AddressException, MessagingException, IOException {
 		Donor r = s.findByEmail(email);
 		
 		LocalDate today = LocalDate.now();
@@ -50,12 +51,13 @@ public class Emailexe {
 		Long i=(long) 1;
 		r.setInvite( i);
 		System.out.println(r.getInvite()+" ");
-		return "<h1>Successfullysent</h1>";
+		mvw.setViewName("invitesent");
 		}
 		else if(r.getInvite()!=null){
 
 			Period period=Period.between(today, lastinvite);
-	
+	         if(period.getDays()>=30)
+	         {
 				s.UpdateInviteany(email);
 				s.UpdateInvitetime(email);
 				EmailController t  = new EmailController();
@@ -64,19 +66,22 @@ public class Emailexe {
 				Long i=(long) 1;
 				r.setInvite( i);
 				System.out.println(r.getInvite()+" ");
+	         mvw.setViewName("invitesent");
+	         
+	         }
+	         else
+	        	 mvw.setViewName("resting");
 				
-			
-			return "<h1>Successfully hi sent</h1>";
 		}
 			
 		else {
-			return "<h1>email not send since the donar has not finished his monthly rest</h1>";
+			 mvw.setViewName("error");
 				
 			
 		}
 	
 		
-		
+		return mvw;
 		/*for (int i = 0; i < r.size(); i++) {
 			
 			try {

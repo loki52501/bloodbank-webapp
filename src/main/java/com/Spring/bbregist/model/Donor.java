@@ -47,6 +47,17 @@ private String gender;
 private Long donated;
 
 @NotNull
+@Column(name="daccepted")
+private Long daccepted;
+
+
+public Donor() {
+	super();
+	donated=(long) 0;
+	invite=(long) 0;
+}
+
+@NotNull
 @Column(name="address1")
 private String ad1;
 
@@ -91,6 +102,41 @@ private LocalDate invitedate;
 
 @NotNull
 private LocalDate donateddate;
+
+public Long getDaccepted() {
+	return daccepted;
+}
+
+
+public void setDaccepted(Long daccepted) {
+	this.daccepted = daccepted;
+}
+
+
+public Donor(String firstname, String lastname, String email, Date dob, String gender, Long donated, Long daccepted,
+		String ad1, String ad2, String state, String city, String bloodgroup, Long phno, String password,
+		Collection<Role> roles, Long invite, LocalDate invitedate, LocalDate donateddate) {
+	super();
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.email = email;
+	this.dob = dob;
+	this.gender = gender;
+	this.donated = donated;
+	this.daccepted = daccepted;
+	this.ad1 = ad1;
+	this.ad2 = ad2;
+	this.state = state;
+	this.city = city;
+	this.bloodgroup = bloodgroup;
+	this.phno = phno;
+	this.password = password;
+	this.roles = roles;
+	this.invite = invite;
+	this.invitedate = invitedate;
+	this.donateddate = donateddate;
+}
+
 
 public Donor(String firstname, String lastname, String email, Date dob, String gender, Long donated, String ad1,
 		String ad2, String state, String city, String bloodgroup, Long phno, String password, Collection<Role> roles,
@@ -260,9 +306,8 @@ public Donor(String firstname, String lastname, String email, Date dob, String g
 	this.roles = roles;
 }
 
-public Donor() {
-	
-}
+
+
 
 
 

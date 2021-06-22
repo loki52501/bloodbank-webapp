@@ -11,7 +11,8 @@
 
     <!-- Title Page-->
     <title>Hospital Registeration</title>
-
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -110,7 +111,7 @@ body{
 }
 
       </style>
-  
+
 </head>
 
 <body class="u-body"><header class=" u-clearfix u-header u-section-row-container" id="sec-3d08"><div class="u-section-rows">
@@ -214,11 +215,11 @@ th:href="@{/donorregistration}" style="padding: 10px 20px;">User Registeration</
 					<div class="alert alert-info">You've successfully registered
 						to our awesome app!</div>
 				</div>
-                    <form th:action="@{/hospitalregistration}" method="POST" th:object="${hospital}">
+                    <form th:action="@{/hospitalregistration}" method="POST" th:object="${hospital}" id="registration" required autofocus>
   
                     
                         <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Hospital Name" name="hospitalname" th:field="*{name}" required autofocus>
+                            <input class="input--style-2" type="text" placeholder="Hospital Name" name="hospitalname" th:field="*{name}"autofocus>
                         </div>
                        
                         <div class="input-group">
@@ -231,11 +232,15 @@ th:href="@{/donorregistration}" style="padding: 10px 20px;">User Registeration</
         
                                     </div>
                                     <div class="input-group">
-                                        <input class="input--style-2" type="password" placeholder="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="password" th:field="*{password}" required autofocus>
+                                        <input class="input--style-2" type="password" placeholder="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="password" th:field="*{password}" required autofocus>
+        
+                                        </div>
+                                                     <div class="input-group">
+                                        <input class="input--style-2" type="password" placeholder="confirm password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="cpassword" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="password" th:field="*{password}" required autofocus>
         
                                         </div>
                                         <div class="input-group">
-                                            <input class="input--style-2" type="number" placeholder="Phone number" name="phone number" th:field="*{phno}" required autofocus>
+                                            <input class="input--style-2" type="number" placeholder="Phone number" name="phone" th:field="*{phno}" required autofocus>
         
                                             </div>
                                            
@@ -264,6 +269,66 @@ th:href="@{/donorregistration}" style="padding: 10px 20px;">User Registeration</
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
+          <script>
+      
+      $(document).ready(function(){
+  $("#registration").validate({
+    // Specify validation rules
+    rules: {
+     hospitalname: "required",
+ 
+      email: {
+        required: true,
+        email: true
+      },      
+      phone: {
+        required: true,
+        digits: true,
+        minlength: 10,
+        maxlength: 10,
+      },
+      password: {
+        required: true,
+        minlength: 5,
+      }
+    },
+    messages: {
+      hospitalname: {
+      required: "Please enter hospital name",
+     },      
+       
+     phone: {
+      required: "Please enter phone number",
+      digits: "Please enter valid phone number",
+      minlength: "Phone number field accept only 10 digits",
+      maxlength: "Phone number field accept only 10 digits",
+     },     
+     email: {
+      required: "Please enter email address",
+      email: "Please enter a valid email address.",
+     },
+    },
+  
+  });
+});
+      
+      
+
+      var password = document.getElementById("password")
+      , confirm_password = document.getElementById("cpassword");
+
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+  
 
 </body>
 

@@ -40,16 +40,55 @@ public interface DonorRepository extends JpaRepository<Donor,Integer>{
 	@Modifying
 	@Transactional 
 	@Query(value="UPDATE spl.donor\r\n"
-			+ "	SET  invite= 1\r\n"
+			+ "	SET  invite= 1,daccepted=0\r\n"
 			+ "	WHERE email=:email",nativeQuery = true)
     void UpdateInvite(@Param("email")String email);
 	
 	@Modifying
 	@Transactional 
 	@Query(value="UPDATE spl.donor\r\n"
-			+ "	SET  invite= invite +1\r\n"
+			+ "	SET  invite= invite +1,daccepted=0\r\n"
 			+ "	WHERE email=:email",nativeQuery = true)
 	void UpdateInviteany(@Param("email") String email);
 	
+
 	
+	
+	@Modifying
+	@Transactional 
+	@Query(value="UPDATE spl.donor\r\n"
+			+ "	SET  donated= 1\r\n"
+			+ "	WHERE email=:email",nativeQuery = true)
+    void UpdateDonatedfirst(@Param("email")String email);
+	
+	@Modifying
+	@Transactional 
+	@Query(value="UPDATE spl.donor\r\n"
+			+ "	SET  donated= donated +1, daccepted=0\r\n"
+			+ "	WHERE email=:email",nativeQuery = true)
+	void UpdateDonated(@Param("email") String email);
+	
+	@Modifying
+	@Transactional 
+	@Query(value="UPDATE spl.donor\r\n"
+			+ "	SET  donateddate= current_timestamp\r\n"
+			+ "	WHERE email=:email",nativeQuery = true) 
+	void UpdateDonatetime(@Param("email")String email);
+	
+
+	@Modifying
+	@Transactional 
+	@Query(value="UPDATE spl.donor\r\n"
+			+ "	SET daccepted=1,invite=invite-1\r\n"
+			+ "	WHERE email=:email",nativeQuery = true) 
+	void UpdateDaccept(@Param("email")String email);
+	
+	@Modifying
+	@Transactional 
+	@Query(value="UPDATE spl.donor\r\n"
+			+ "	SET daccepted=2,invite=invite-1\r\n"
+			+ "	WHERE email=:email",nativeQuery = true) 
+	void UpdateDdecline(@Param("email")String email);
+	
+	Donor findById(int id);
 }

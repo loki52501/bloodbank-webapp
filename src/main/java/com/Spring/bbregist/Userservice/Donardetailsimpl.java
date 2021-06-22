@@ -40,7 +40,7 @@ public class Donardetailsimpl  implements DonorDetails {
 	@Override
 public Donor save(Donordto registrationDto, String name) {
 	Donor user =new Donor(registrationDto.getFirstname(),registrationDto.getLastname(),registrationDto.getEmail(),registrationDto.getDob()
-			,registrationDto.getGender(),registrationDto.getDonated(),registrationDto.getAd1(),registrationDto.getAd2(),registrationDto.getState(),registrationDto.getCity(),
+			,registrationDto.getGender(),registrationDto.getDonated(),registrationDto.getDaccepted(),registrationDto.getAd1(),registrationDto.getAd2(),registrationDto.getState(),registrationDto.getCity(),
 			registrationDto.getBloodgroup(),
 			registrationDto.getPhno(),passwordEncoder.encode(registrationDto.getPassword()),
 			Arrays.asList(new Role(name)),registrationDto.getInvite(),registrationDto.getInvitedate(),registrationDto.getDonateddate());
@@ -113,6 +113,50 @@ public void UpdateInviteany(String email) {
 public void UpdateInvitetime(String email) {
 	userRepository.UpdateInvitetime(email);
 }
+
+
+@Override
+public void UpdateDonated(String email) {
+	userRepository.UpdateDonated(email);
+	
+}
+
+
+@Override
+public Donor findById(int id) {
+	// TODO Auto-generated method stub
+	return userRepository.findById(id);
+}
+
+
+@Override
+public void UpdateDonatetime(String email) {
+userRepository.UpdateDonatetime(email);
+	
+}
+
+
+@Override
+public void UpdateDaccept(String email) {
+	userRepository.UpdateDaccept(email);
+	
+}
+
+
+@Override
+public void UpdateDonatedfirst(String email) {
+userRepository.UpdateDonatedfirst(email);
+	
+}
+
+
+@Override
+public void UpdateDdecline(String email) {
+	userRepository.UpdateDdecline(email);
+	
+}
+
+
 
 
 }

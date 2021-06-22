@@ -123,7 +123,7 @@ body {
                 <div class="bg-white shadow rounded overflow-hidden">
                     <div class="px-4 pt-0 pb-4 cover">
                         <div class="media align-items-end profile-head">
-                            <div class="profile mr-3"><a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a></div>
+                            s
                             <div class="media-body mb-5 text-white">
                                 <h4 class="mt-0 mb-0" th:text="${name}"></h4>
                                 <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2" th:text="${city}"></i ></p>
@@ -137,7 +137,7 @@ body {
                                 <h5 class="font-weight-bold mb-0 d-block" th:text="${invite}">0</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Invited</small>
                             </li>
                             <li class="list-inline-item">
-                                <h5 class="font-weight-bold mb-0 d-block">0</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Donated</small>
+                                <h5 class="font-weight-bold mb-0 d-block" th:text="${donated}">0</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Donated</small>
                             </li>
                         </ul>
                     </div>
@@ -152,11 +152,31 @@ body {
                     </div>
                     <div class="py-4 px-4">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Blood donated history</h5><a href="#" class="btn btn-link text-muted">Show all</a>
+                            <h5 class="mb-0">Blood donation notification</h5><a href="#" class="btn btn-link text-muted">Show all</a>
+                            
+                        </div>
+                          <br>
+                        <div th:if="${daccept==0}">
+<form th:action="@{/donor-home}" method="POST">
+<p>  you have an new invite check your email, if you're interested click accept button below or decline</p>
+  <input type="submit" class="btn btn-success" name="action" id="accept" th:value="ACCEPT"><span class="fa fa-check"></span></a>
+  <input type="submit" class="btn btn-light" name="action" id="accept" th:value="DECLINE"><span class="fa fa-close"></span></a>
+</form>
+<div th:if="${param.accept}">
+	<div class="alert alert-info"> You have accepted a invite, donate before time expires.
+	</div>
+	</div>
+	<div th:if="${daccept==0}">
+	<div class="alert alert-info"> You did not recieve any invite.
+	</div>
+	</div>
                         </div>
                         <div class="row">
                           <ul>
-                            <li><h5> Blood donated on 10/06/2021 at 13.40pm</h5></li>
+                           
+                             <li><h5>
+                             <span th:if="${donatetime}">Last Blood donated on <span th:text="${donatetime}">10/06/2021 at 13.40pm </span>
+                             <span th:unless="${donatetime}">You haven't donated blood yet!</span></h5></li>
                           </ul>
                         </div>
                     </div>

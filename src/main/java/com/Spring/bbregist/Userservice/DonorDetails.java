@@ -28,5 +28,16 @@ public interface DonorDetails extends UserDetailsService{
 	
 	void UpdateInvitetime(@Param("email")String email);
 	
+void UpdateDonated(@Param("email") String email);
+	
+	Donor findById(int id);
+	
+	void UpdateDonatetime(@Param("email")String email);
+	
 
+	void UpdateDaccept(@Param("email")String email);
+	
+	void UpdateDdecline(@Param("email")String email);
+	
+	  void UpdateDonatedfirst(@Param("email")String email);
 }
